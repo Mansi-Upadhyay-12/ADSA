@@ -1,0 +1,37 @@
+import java.util.Stack;
+
+class BrowserHistory {
+    Stack<String> back;
+    Stack<String> forward;
+    String current;
+
+    public BrowserHistory(String homepage) {
+        back = new Stack<>();
+        forward = new Stack<>();
+        current = homepage;
+    }
+
+    public void visit(String url) {
+        back.push(current);
+        current = url;
+        forward.clear();
+    }
+
+    public String back(int steps) {
+        while (steps > 0 && !back.isEmpty()) {
+            forward.push(current);
+            current = back.pop();
+            steps--;
+        }
+        return current;
+    }
+
+    public String forward(int steps) {
+        while (steps > 0 && !forward.isEmpty()) {
+            back.push(current);
+            current = forward.pop();
+            steps--;
+        }
+        return current;
+    }
+}
