@@ -1,10 +1,10 @@
-class BrowserHistorybyArray {
+public class BrowserHistorybyArray {
     String[] history;
     int current;
     int last;
 
     public BrowserHistory(String homepage) {
-        history = new String[5000]; 
+        history = new String[5000];
         history[0] = homepage;
         current = 0;
         last = 0;
@@ -17,12 +17,19 @@ class BrowserHistorybyArray {
     }
 
     public String back(int steps) {
-        current = Math.max(0, current - steps);
+        while (steps > 0 && current > 0) {
+            current--;
+            steps--;
+        }
         return history[current];
     }
 
     public String forward(int steps) {
-        current = Math.min(last, current + steps);
+        while (steps > 0 && current < last) {
+            current++;
+            steps--;
+        }
         return history[current];
     }
-}
+
+
